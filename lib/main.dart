@@ -4,10 +4,8 @@ import 'package:week_two_machine_task/config/routes/route_names.dart';
 import 'package:week_two_machine_task/config/routes/routes.dart';
 import 'package:week_two_machine_task/dependency_injection.dart';
 import 'package:week_two_machine_task/features/domain/use_cases/notification_cases.dart';
-import 'package:week_two_machine_task/features/presentation/home_page/home_page.dart';
-import 'package:week_two_machine_task/features/presentation/notification_page/bloc/notification_event.dart';
 
-import 'features/presentation/notification_page/bloc/notification_bloc.dart';
+import 'features/presentation/pages/notification_page/bloc/notification_bloc.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,8 +27,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
+          brightness: Brightness.light,
         ),
-        initialRoute: RouteNames.homeScreen,
+        initialRoute: RouteNames.mainScreen,
         onGenerateRoute: Routes.getRoutes,
       ),
     );

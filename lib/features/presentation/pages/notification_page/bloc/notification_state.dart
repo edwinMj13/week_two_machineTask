@@ -1,3 +1,4 @@
+import 'package:week_two_machine_task/features/data/models/PagignationModel.dart';
 import 'package:week_two_machine_task/features/data/models/notification_data_model.dart';
 
 abstract class NotificationState{}

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:week_two_machine_task/config/utils/colors.dart';
+import 'package:week_two_machine_task/config/utils/constants.dart';
 import 'package:week_two_machine_task/features/data/models/error_model.dart';
 import 'package:week_two_machine_task/features/data/models/notification_data_model.dart';
-import 'package:week_two_machine_task/features/presentation/notification_page/bloc/notification_event.dart';
+import 'package:week_two_machine_task/features/domain/use_cases/notification_cases.dart';
 
-import '../widgets/notifications_items_widget.dart';
+import '../../widgets/notifications_items_widget.dart';
 import 'bloc/notification_bloc.dart';
+import 'bloc/notification_event.dart';
 import 'bloc/notification_state.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -17,6 +19,8 @@ class NotificationPage extends StatefulWidget {
 }
 
 class _NotificationPageState extends State<NotificationPage> {
+
+  //int totalProducts = 1000;
   @override
   void initState() {
 // TODO: implement initState
@@ -28,7 +32,7 @@ class _NotificationPageState extends State<NotificationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100),
+          preferredSize: const Size.fromHeight(100),
           child:
               // Center(
               //   child: Container(
@@ -55,29 +59,77 @@ class _NotificationPageState extends State<NotificationPage> {
               //   ),
               // ),
               AppBar(
-            title: Text("Notifications"),
+            title: const Text(ConstantsUtils.notificationText,style: TextStyle(fontFamily: ConstantsUtils.poppinsFamilyText),),
+            leading: IconButton(
+                onPressed: () =>Navigator.of(context).pop(),
+                style: IconButton.styleFrom(
+                  backgroundColor: AppColors.green,
+                ),
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: AppColors.white,
+                )),
             elevation: 1,
             shadowColor: Colors.grey,
           )),
-      body: BlocBuilder<NotificationBloc, NotificationState>(
-        builder: (context, state) {
-          print("Current State - ${state.runtimeType}");
-          if (state is NotificationLoadErrorState) {
-            return Center(child: Text(state.errorMessage));
-          } else if (state is NotificationLoadingState) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is NotificationLoadedSuccessState) {
-            return ListView.builder(
-              itemBuilder: (context, index) {
-                return NotificationItemsWidget(dataList: state.model,index:index,);
-              },
-              itemCount: state.model.length,
-            );
-          }
-          return const SizedBox();
-        },
-      ),
+      body: NotificationPageContent(runtimeType: runtimeType),
     );
   }
 }
 
+class NotificationPageContent extends StatelessWidget {
+
+  NotificationPageContent({
+    super.key,
+    required this.runtimeType,
+  });
+
+  final Type runtimeType;
+
+  // @override
+  // void initState() {
+  //   scrollController.addListener(NotificationCases.loadMore(scrollController));
+  //   super.initState();
+  // }
+
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   scrollController.dispose();
+  //   super.dispose();
+  // }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<NotificationBloc, NotificationState>(
+      builder: (context, state) {
+        print("Current State - ${state.runtimeType}");
+        if (state is NotificationLoadErrorState) {
+          return Center(child: Text(state.errorMessage));
+        } else if (state is NotificationLoadingState) {
+          return const Center(
+              child: CircularProgressIndicator(
+            color: AppColors.green,
+          ));
+        } else if (state is NotificationLoadedSuccessState) {
+          return ListView.separated(
+            physics: const AlwaysScrollableScrollPhysics(),
+            shrinkWrap: false,
+            //controller: scrollController,
+            separatorBuilder: (context,index)=>const Divider(thickness: 0.5,),
+            itemBuilder: (context, index) {
+              return NotificationItemsWidget(
+                dataList: state.model,
+                index: index,
+              );
+            },
+            itemCount: state.model.length,
+          );
+        }
+        return const SizedBox();
+      },
+    );
+  }
+
+
+}
