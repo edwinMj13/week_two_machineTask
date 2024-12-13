@@ -4,9 +4,7 @@
 
 This application is a comprehensive multi-service delivery platform designed to cater to a variety of user needs. It enables users to order a wide range of items, including food, medicines, pet supplies, gifts, meats, and cosmetics, directly to their doorstep. The app is built to simplify daily tasks and provide convenience, offering a seamless experience through an intuitive interface and robust functionality.
 
-![Screenshot_20241213-072732](https://github.com/user-attachments/assets/992d8057-f57d-4a2f-86e5-bc041fcfd7b8)
-
-![Screenshot_20241213-073116](https://github.com/user-attachments/assets/4954c880-b423-434a-adb9-c26dc6877960)
+![Screenshot_20241213-072732](https://github.com/user-attachments/assets/992d8057-f57d-4a2f-86e5-bc041fcfd7b8)   ![Screenshot_20241213-073116](https://github.com/user-attachments/assets/4954c880-b423-434a-adb9-c26dc6877960)
 
 
 ## Features
