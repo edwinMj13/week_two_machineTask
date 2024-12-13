@@ -25,6 +25,22 @@ This application is a comprehensive multi-service delivery platform designed to 
 - **Notifications**: Receive updates on order status and promotional offers.
 - **Customer Support**: Get help through an in-app chat or helpline.
 
+Installation
+
+Clone this repository:
+
+git clone https://github.com/edwinMj13/week_two_machineTask.git
+
+Navigate to the project directory:
+
+cd week_two_machineTask
+
+Install dependencies:
+
+flutter pub get
+
+Run the app:
+flutter run
 
 Thank you for using the Multi-Service Delivery App!
 
